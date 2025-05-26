@@ -1,7 +1,7 @@
 ﻿using Microsoft.Data.SqlClient;
 
 // Add your database server
-string databaseServer = "";
+string databaseServer = "(localdb)\\MSSQLLocalDB";
 
 // Get sql files
 string scriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DatabaseScripts");
