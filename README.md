@@ -15,7 +15,7 @@ It executes a series of SQL scripts to create the database and its required tabl
 git clone https://github.com/jedrzejkoriat/ProjectManager-02.DatabaseSetup.git
 ```
 
-2. **Add your database server**
+2. **Add your database server name in Program.cs**
 
 
 3. **Run the application**
