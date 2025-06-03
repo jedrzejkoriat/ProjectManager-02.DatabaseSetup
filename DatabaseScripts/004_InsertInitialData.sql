@@ -16,11 +16,12 @@ INSERT INTO Permissions (Id, Name) VALUES
 ('23d3449a-dcd0-4aeb-9331-9828475ab5b2', 'RemoveTicketRelation');
 
 INSERT INTO Priorities (Id, Name, Level) VALUES
-('b7d8f22e-bc89-456a-9f90-48c211f60a3e', 'Lowest', 0),
-('8b9d2e8a-bb27-40be-a12f-f63d91aa2aef', 'Low', 1),
-('d2fc7c7c-c509-4d50-93d4-7dfbf262e06f', 'Medium', 2),
-('c5d8d5e2-d5fd-4e67-ae56-d77b1efcf174', 'High', 3),
-('69cf2f1a-ea70-4ce0-802d-fc9a498d2d5a', 'Highest', 4);
+('9fcb12a4-25de-4e5f-b3e2-17e1ea3cd8e9', 'Undefined', 0),
+('b7d8f22e-bc89-456a-9f90-48c211f60a3e', 'Lowest', 1),
+('8b9d2e8a-bb27-40be-a12f-f63d91aa2aef', 'Low', 2),
+('d2fc7c7c-c509-4d50-93d4-7dfbf262e06f', 'Medium', 3),
+('c5d8d5e2-d5fd-4e67-ae56-d77b1efcf174', 'High', 4),
+('69cf2f1a-ea70-4ce0-802d-fc9a498d2d5a', 'Highest', 5);
 
 INSERT INTO Roles (Id, Name) VALUES
 ('bdc9fd77-60f0-4c4a-97c2-2647e11831b7', 'Admin'),
