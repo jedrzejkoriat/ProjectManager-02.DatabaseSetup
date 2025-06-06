@@ -3,7 +3,6 @@ USE ProjectManagerDB;
 INSERT INTO Permissions (Id, Name) VALUES
 ('4f03786f-6c4e-4b2a-82db-d3ac6aabc144', 'ReadComment'),
 ('a4e8f3a1-5df7-4d48-9f02-693a2cdd1d8f', 'WriteComment'),
-('e2d6db94-1a65-4b4f-a4b5-3b54cfd010b6', 'ReadPriority'),
 ('021b5b70-45ce-4ea4-94ad-87fd32c5dc73', 'ReadProject'),
 ('d9c1f858-4d46-47b0-8c2e-79e4ec1b4a93', 'ReadTag'),
 ('9b46c73c-70de-4d51-a5b0-99ef2c5cb37a', 'WriteTag'),
