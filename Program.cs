@@ -2,7 +2,8 @@
 using ProjectManager_02.DatabaseSetup;
 
 // Add your database server name!!!
-string serverName = "(localdb)\\MSSQLLocalDB";
+Console.Write("Provide your SQL server name (ex. (localdb)\\MSSQLLocalDB): ");
+var serverName = Console.ReadLine();
 
 // Essential scripts
 string scriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DatabaseScripts");
