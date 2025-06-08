@@ -1,13 +1,13 @@
-BEGIN TRANSACTION;
+USE ProjectManagerDB;
 
 -- Projects
 INSERT INTO Projects(Id, Name, [Key], CreatedAt) VALUES 
 ('94e4c030-7ae2-46fd-b458-f80f9fbdefde', 'testproject', 'TST', '2025-06-07'),
 ('5105a434-7727-4e0e-b4c2-92976ea94109', 'devproject', 'DEV', '2025-06-07')
 
--- Users (password is just 'password')
+-- Users (Password: password)
 INSERT INTO Users (Id, UserName, PasswordHash, Email, CreatedAt) VALUES
-('95f86aee-8678-4dc1-bc87-6c15377620b7', 'admin', '$2a$12$PkBn5ZmGX/qkqUos1YPVD.rFb.S46Nogz8mkcbFQ10MOARWculDCW', 'admin@test.com', '2025-06-07'),
+('95f86aee-8678-4dc1-bc87-6c15377620b7', 'adminn', '$2a$12$PkBn5ZmGX/qkqUos1YPVD.rFb.S46Nogz8mkcbFQ10MOARWculDCW', 'adminn@test.com', '2025-06-07'),
 ('a32453c2-dda5-472d-b0e6-172244ddd13c', 'superuser', '$2a$12$PkBn5ZmGX/qkqUos1YPVD.rFb.S46Nogz8mkcbFQ10MOARWculDCW', 'superuser@test.com', '2025-06-07'), 
 ('8f5b69c5-afe8-49a4-b5f7-9c71e92e4f42', 'zerouser', '$2a$12$PkBn5ZmGX/qkqUos1YPVD.rFb.S46Nogz8mkcbFQ10MOARWculDCW', 'zerouser@test.com', '2025-06-07')
 
@@ -41,5 +41,3 @@ INSERT INTO ProjectRolePermissions (ProjectRoleId, PermissionId) VALUES
 INSERT INTO ProjectUserRoles (Id, ProjectId, ProjectRoleId, UserId) VALUES
 ('2b1d73f6-abcc-4b7e-a04d-67c3a6fa9d96', '94e4c030-7ae2-46fd-b458-f80f9fbdefde', '1cf24607-8488-43ce-a80e-a8905d637d01', 'a32453c2-dda5-472d-b0e6-172244ddd13c'),
 ('9dbc31f4-9a45-4728-a1b0-d1bb75a98c3d', '5105a434-7727-4e0e-b4c2-92976ea94109', 'f5fd6c71-f166-4d02-b7f8-06695c435885', '8f5b69c5-afe8-49a4-b5f7-9c71e92e4f42')
-
-COMMIT TRANSACTION;

@@ -1,40 +1,64 @@
 ﻿using Microsoft.Data.SqlClient;
+using ProjectManager_02.DatabaseSetup;
 
-// Add your database server
-string databaseServer = "(localdb)\\MSSQLLocalDB";
+// Add your database server name!!!
+string serverName = "(localdb)\\MSSQLLocalDB";
 
-// Get sql files
+// Essential scripts
 string scriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "DatabaseScripts");
-var sqlFiles = Directory.GetFiles(scriptsPath, "*.sql")
-                        .OrderBy(f => f);
+var sqlFiles = Directory.GetFiles(scriptsPath, "*.sql").OrderBy(f => f);
 
-// Initial script - to create database
-string connectionStringInitial = $"Server={databaseServer};Database=master;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False";
-
-string sqlInitial = File.ReadAllText(sqlFiles.First());
-Console.WriteLine($"Executing: {Path.GetFileName(sqlFiles.First())}");
-
-using var connectionInitial = new SqlConnection(connectionStringInitial);
-connectionInitial.Open();
-
-using var commandInitial = new SqlCommand(sqlInitial, connectionInitial);
-commandInitial.ExecuteNonQuery();
-
-Console.WriteLine($"Done: {Path.GetFileName(sqlFiles.First())}");
-
-// The rest of the scripts
-foreach (var file in sqlFiles.Skip(1))
+bool isFirst = true;
+foreach (var file in sqlFiles)
 {
-    string connectionString = $"Server={databaseServer};Database=ProjectManagerDB;Trusted_Connection=True;MultipleActiveResultSets=true;Encrypt=False";
+    if (isFirst)
+        ScriptHelper.ExecuteScript(file, serverName, "master");
+    else
+        ScriptHelper.ExecuteScript(file, serverName, "ProjectManagerDB");
 
-    string sql = File.ReadAllText(file);
-    Console.WriteLine($"Executing: {Path.GetFileName(file)}");
+    isFirst = false;
+}
 
-    using var connection = new SqlConnection(connectionString);
-    connection.Open();
+// Admin
+Console.WriteLine();
+Console.WriteLine("========================================");
+Console.Write("Add initial admin? (y/n): ");
+char addAdmin = Console.ReadKey().KeyChar;
 
-    using var command = new SqlCommand(sql, connection);
-    command.ExecuteNonQuery();
+if (addAdmin == 'y')
+{
+    string adminScriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Admin");
+    var adminSqlFiles = Directory.GetFiles(adminScriptsPath, "*.sql").OrderBy(f => f);
 
-    Console.WriteLine($"Done: {Path.GetFileName(file)}");
+    foreach (var file in adminSqlFiles)
+    {
+        ScriptHelper.ExecuteScript(file, serverName, "ProjectManagerDB");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine("Login: Admin");
+    Console.WriteLine("Password: Password123!");
+}
+
+// Test data
+Console.WriteLine();
+Console.WriteLine("========================================");
+Console.Write("Add test data? (y/n): ");
+char addTestData = Console.ReadKey().KeyChar;
+
+if (addTestData == 'y')
+{
+    string testScriptsPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "TestData");
+    var testSqlFiles = Directory.GetFiles(testScriptsPath, "*.sql").OrderBy(f => f);
+
+    foreach (var file in testSqlFiles)
+    {
+        ScriptHelper.ExecuteScript(file, serverName, "ProjectManagerDB");
+    }
+
+    Console.WriteLine();
+    Console.WriteLine("Login: superuser [USER WITH ALL PERMISSIONS FOR 'testproject']");
+    Console.WriteLine("Login: zerouser [USER WITHOUT PROJECT PERMISSIONS]");
+    Console.WriteLine("Login: adminn [ADMIN]");
+    Console.WriteLine("Password: password");
 }
